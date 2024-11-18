@@ -59,7 +59,7 @@ bool solve(int N, int A,int  B) {
 
 int main() {
 #ifndef DOMJUDGE
-	std::ifstream in("1.in");
+	std::ifstream in("in.txt");
 	auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
 #endif
 	int A, B,N;
