@@ -46,7 +46,7 @@ bool solve_p() {
 
 int main() {
 #ifndef DOMJUDGE
-	std::ifstream in("pac.in");
+	std::ifstream in("in_txt");
 	auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
 #endif
 	while (solve_p());
