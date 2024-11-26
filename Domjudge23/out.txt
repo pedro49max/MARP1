@@ -1,6 +1,0 @@
-27 NO
-19 SI
----
-5 SI
-SIN CAMINO
----
