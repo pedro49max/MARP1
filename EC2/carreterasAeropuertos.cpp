@@ -1,4 +1,3 @@
-//Pedro Tobalina
 #include <stdio.h>
 #include <iostream>
 #include<fstream>
@@ -16,7 +15,7 @@ class Aeropuerto {
     int Aero;
 public:
     //O(A*(log(A))
-    Aeropuerto(GrafoValorado<int> const& g, int A) : cost(0), Aero(0){//Se calcula el coste de las carreteras minimo, y despues se cuentan los grafos separados dentro de g para el numero de aeropuertos
+    Aeropuerto(GrafoValorado<int> const& g, int A) : cost(0), Aero(0){
         Aero = g.V();
         PriorityQueue<Arista<int>> pq(g.aristas());//O(A*(log(A))
         ConjuntosDisjuntos cjtos(g.V());//O(V)
