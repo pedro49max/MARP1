@@ -17,7 +17,7 @@ bool operator>(User u1, User u2) {
 
 typedef priority_queue<User, vector<User>, greater<User>> pq;
 
-bool solve_m() {
+bool solve_m() {//O(N log N + K log N)
 	int N;
 	cin >> N;
 	if (N == 0)
@@ -25,20 +25,21 @@ bool solve_m() {
 
 	pq periods;
 	User us;
-	for (int i = 0; i < N; ++i) {
+	//Lectura de los usuarios
+	for (int i = 0; i < N; ++i) {//O(N log N)
 		cin >> us.ID >> us.period;
 		us.time = us.period;
-		periods.push(us);
+		periods.push(us);//O(log N)
 	}
 
 	int K;
 	cin >> K;
-
-	while (K && !periods.empty()) {
-		User q = periods.top(); periods.pop();
-		cout << q.ID /* << " " << q.time*/ << "\n";
+//Procesamiento de los K primeros usuarios. Cada vez que se procesa uno, se vuelve a insertar con su nuevo tiempo.
+	while (K && !periods.empty()) {//O(K log N)
+		User q = periods.top(); periods.pop();//Saco el usuario con menor tiempo O(log N)
+		cout << q.ID << "\n";
 		q.time += q.period;
-		periods.push(q);
+		periods.push(q);//O(log N)
 		--K;
 	}
 	cout << "---\n";
