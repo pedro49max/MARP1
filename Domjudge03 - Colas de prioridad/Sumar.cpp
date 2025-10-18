@@ -7,7 +7,7 @@ using namespace std;
 
 typedef priority_queue<long long, vector<long long>, greater<long long>> pq;
 
-bool solve_s() {
+bool solve_s() {//O(N log N)
 	int N;
 	cin >> N;
 	if (N == 0)
@@ -15,18 +15,18 @@ bool solve_s() {
 
 	pq sums;
 	long long a;
-	for (int i = 0; i < N; ++i) {
+	for (int i = 0; i < N; ++i) {//N veces
 		cin >> a;
-		sums.push(a);
+		sums.push(a);//push log(n)
 	}
 
 	long long cost = 0, sumand1, sumand2, sum;
-	while (sums.size() > 1) {
-		sumand1 = sums.top(); sums.pop();
-		sumand2 = sums.top(); sums.pop();
+	while (sums.size() > 1) {//n-1 veces
+		sumand1 = sums.top(); sums.pop();//pop log(n)
+		sumand2 = sums.top(); sums.pop();//pop log(n)
 		sum = sumand1 + sumand2;
 		cost += sum;
-		sums.push(sum);
+		sums.push(sum);//push log(n)
 	}
 
 	cout << cost << endl;
