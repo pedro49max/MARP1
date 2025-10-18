@@ -18,7 +18,7 @@ bool operator<(Paciente u1, Paciente u2) {
 
 typedef priority_queue<Paciente, vector<Paciente>, less<Paciente>> pq;
 
-bool solve_p() {
+bool solve_p() {// O(N log N)
 	int N;
 	cin >> N;
 	if (N == 0)
@@ -27,15 +27,15 @@ bool solve_p() {
 	pq pacientes;
 	Paciente pac;
 	char op;
-	for (int i = 0; i < N; ++i) {
+	for (int i = 0; i < N; ++i) {// O(N log N)
 		cin >> op;
 		if (op == 'I') {
 			cin >> pac.name >> pac.gravedad;
 			pac.tiempo = i;
-			pacientes.push(pac);
+			pacientes.push(pac);// insertar paciente en la cola con sus parametros O(log n)
 		}
 		else if (op == 'A') {
-			pac = pacientes.top(); pacientes.pop();
+			pac = pacientes.top(); pacientes.pop();// eliminar paciente con mayor prioridad O(log n)
 			cout << pac.name << endl;
 		}
 	}
