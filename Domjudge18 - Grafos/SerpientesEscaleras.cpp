@@ -2,7 +2,6 @@
 #include<fstream>
 #include<vector>
 #include<queue>
-#include"Grafo.h"
 using namespace std;
 
 struct p {
@@ -16,29 +15,31 @@ bool operator>(p p1, p p2) {
 
 typedef priority_queue<p,vector<p>, greater<p>> pq;
 
-
-int dfs(const Grafo &tablero, vector<bool> &visited, const int &maxId, const int &k, vector<int> &escaleras) {
+//O(N*N*K)
+int dfs(const vector<vector<int>> &tablero, vector<bool> &visited, const int &maxId, const int &k, vector<int> &escaleras) {
 	visited[0] = true;
 	pq dd;
 	p a = { 0,0 };
 	int num = 0, deep = 0;
-	dd.push(a);
+	dd.push(a);//O(log(n))
+	
 	while (!dd.empty() && num != maxId) {
 		a = dd.top(); dd.pop();
 		num = a.x; deep = a.deepness;
+		//si no es el maximo, explorar adyacentes
 		if(num!=maxId)
-			for (int x : tablero.ady(num)) {
+			for (int x : tablero[num]) {
 				if (!visited[x]) {
 					visited[x] = true;
 					for(int fr = 0; fr < escaleras.size();fr++)//salto por escalera o serpiente
 						if (escaleras[fr] == x) {
-							x = tablero.ady(x)[0];
+							x = tablero[x][0];
 							visited[x] = true;
 						}
 					//cout << deep << ": from " << num << " to " << x << endl;
 					a.x = x;
 					a.deepness = deep + 1;
-					dd.push(a);
+					dd.push(a);//O(log(n))
 				}
 			}
 	}
@@ -53,14 +54,14 @@ int main() {
 	int N, K, S, E;
 	cin >> N >> K >> S >> E;
 	while (N != 0) {
-		Grafo tablero(N * N);
+		vector<vector<int>> tablero(N * N);
 		vector<bool> seted(N * N, false);
 		vector<int> escaleras(E +S);
 		for (int i = 0; i < (S + E); i++) {
 			int a, b;
 			cin >> a >> b;
 			a--; b--;
-			tablero.ponArista(a, b);
+			tablero[a].push_back(b);
 			escaleras[i] = a;
 			seted[a] = true;
 		}
@@ -68,7 +69,7 @@ int main() {
 			if (!seted[i]) {
 				seted[i] = true;
 				for (int j = i + 1; j < N * N && j <= i + K; j++) {
-					tablero.ponArista(i, j);
+					tablero[i].push_back(j);
 				}
 			}
 		}

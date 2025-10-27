@@ -14,6 +14,7 @@ int main() {
 		vector<vector<bool>> visited(R, vector<bool>(C, false));
 		char x;
 		int couterManchas = 0;
+		//Lectura del mapa
 		for (int r = 0; r < R; r++) {//O(n)
 			for (int c = 0; c < C; c++) {
 				cin >> x;
@@ -26,6 +27,7 @@ int main() {
 		};
 		queue<coordenadas> cola;
 		int maxi = 0;
+		//Bucle para contar manchas
 		for (int r = 0; r < R; r++) {
 			for (int c = 0; c < C; c++) {//O(log(n))
 				if (!visited[r][c]) {
@@ -33,6 +35,7 @@ int main() {
 					int cx = 0;
 					cola.push(coordenadas{ r,c });
 					visited[r][c] = true;
+					//BFS para contar el tamaño de la mancha
 					while (!cola.empty()) {
 						coordenadas coor = cola.front(); cola.pop();
 						cx++;

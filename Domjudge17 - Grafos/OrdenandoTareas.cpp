@@ -13,13 +13,13 @@ public:
             if (!visit[v])
                 dfs(g, v);
     }
-    // devuelve la ordenación topológica
+    // devuelve la ordenaciï¿½n topolï¿½gica
     std::deque<int> const& orden() const {
         return _orden;
     }
 private:
     std::vector<bool> visit;
-    std::deque<int> _orden; // ordenación topológica
+    std::deque<int> _orden; // ordenaciï¿½n topolï¿½gica
     void dfs(Digrafo const& g, int v) {
         visit[v] = true;
         for (int w : g.ady(v))
@@ -43,19 +43,19 @@ public:
 private:
     
 
-    std::vector<int> ant; // ant[v] = vértice anterior en el camino a v
-    std::vector<bool> visit; // visit[v] = ¿se ha alcanzado a v en el dfs?
-    std::vector<bool> apilado; // apilado[v] = ¿está el vértice v en la pila?
-    deque<int> _ciclo; // ciclo dirigido (vacío si no existe)
+    std::vector<int> ant; // ant[v] = vï¿½rtice anterior en el camino a v
+    std::vector<bool> visit; // visit[v] = ï¿½se ha alcanzado a v en el dfs?
+    std::vector<bool> apilado; // apilado[v] = ï¿½estï¿½ el vï¿½rtice v en la pila?
+    deque<int> _ciclo; // ciclo dirigido (vacï¿½o si no existe)
 
     bool hayciclo;
-    void dfs(Digrafo const& g, int v) {
+    void dfs(Digrafo const& g, int v) {// dfs desde v
         apilado[v] = true;
         visit[v] = true;
         for (int w : g.ady(v)) {
             if (hayciclo) // si hemos encontrado un ciclo terminamos
                 return;
-            if (!visit[w]) { // encontrado un nuevo vértice, seguimos
+            if (!visit[w]) { // encontrado un nuevo vï¿½rtice, seguimos
                 ant[w] = v; dfs(g, w);
             }
             else if (apilado[w]) { // hemos detectado un ciclo
@@ -91,12 +91,14 @@ int main() {
             grafo.ponArista(a,b);
         }
         CicloDirigido dg(grafo);
-        if (dg.hayCiclo()) {
+
+        //si hay ciclo, imposible
+        if (dg.hayCiclo()) {//O(V + A)
             cout << "Imposible" << endl;
-        }
+        }//Otro caso, orden topologico
         else {
             OrdenTopologico oro (grafo);
-            result = oro.orden();
+            result = oro.orden();//O(V + A)
             cout << result.front() +1 ; result.pop_front();
             while (!result.empty()) {
                 cout << " " << result.front() + 1; result.pop_front();

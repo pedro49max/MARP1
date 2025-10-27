@@ -16,7 +16,7 @@ int min_pulsations(int start, int target) {//Olog(n)
     visited[start] = 0;  
 
    
-    while (!q.empty()) {
+    while (!q.empty()) {//O(n)
         int current = q.front();
         q.pop();
 
@@ -24,22 +24,22 @@ int min_pulsations(int start, int target) {//Olog(n)
             return visited[current];  
         }
 
-        
+        // Generar los siguientes estados
         int next_add = (current + 1) % 10000;       
         int next_mul = (current * 2) % 10000;       
         int next_div = current / 3;               
 
-        
+        // Verificar y agregar a la cola si no ha sido visitado
         if (visited[next_add] == -1) {
             visited[next_add] = visited[current] + 1;
             q.push(next_add);
         }
-
+        // Verificar y agregar a la cola si no ha sido visitado
         if (visited[next_mul] == -1) {
             visited[next_mul] = visited[current] + 1;
             q.push(next_mul);
         }
-
+        // Verificar y agregar a la cola si no ha sido visitado
         if (visited[next_div] == -1) {
             visited[next_div] = visited[current] + 1;
             q.push(next_div);
